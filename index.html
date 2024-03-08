@@ -118,7 +118,36 @@
         }
         return null;
       }
+
+      // Forma
+      document
+        .getElementById("email-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          let formData = new FormData(event.target);
+
+          fetch("send_mail.php", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.text())
+            .then((data) => {
+              document.getElementById(
+                "status"
+              ).innerHTML = `<p style='color: green;'>${data}</p>`;
+            })
+            .catch((error) => {
+              console.error("Error during fetch operation: ", error);
+              document.getElementById(
+                "status"
+              ).innerHTML = `<p style='color: red;'>Error sending email!</p>`;
+            });
+        });
     </script>
+
+    <!-- <script></script> -->
+
     <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="images/webclip.png" rel="apple-touch-icon" />
   </head>
@@ -566,6 +595,108 @@
         </div>
       </div>
     </section>
+
+    <div class="form-section">
+      <div class="container">
+        <div class="w-layout-hflex flex-block-6">
+          <div class="div-block-14">
+            <h4 class="h4-form h4-form-first">
+              Popunite formu tačnim podacima i na broj koji ste unijeli će Vam
+              stići potvrda da ste se uspješno registrovali za nagradnu igru.
+            </h4>
+            <h4 class="h4-form">
+              Možda baš tebe DURACELL obraduje nekom od nagrada. Srećno!
+            </h4>
+            <div class="div-block-16">
+              <a
+                href="https://plazmanagradnaigra.ba/wp-content/uploads/2024/02/Sluzbena_Pravila_Plazma_Bingo_2024_RS.pdf"
+                target="_blank"
+                class="link-btn w-inline-block"
+              >
+                <h5 class="form-btn">Pravila NI - RS</h5>
+              </a>
+              <a
+                href="https://plazmanagradnaigra.ba/wp-content/uploads/2024/02/Sluzbena_Pravila_Plazma_Bingo_2024_FBiH.pdf"
+                target="_blank"
+                class="link-btn w-inline-block"
+              >
+                <h5 class="form-btn">Pravila NI - FBiH</h5>
+              </a>
+            </div>
+          </div>
+          <div class="div-block-15">
+            <div class="form-block w-form">
+              <div id="status"></div>
+              <form
+                id="email-form"
+                name="email-form"
+                data-name="Email Form"
+                method="get"
+                data-wf-page-id="65e826bdcee7df4dca918489"
+                data-wf-element-id="5c4ed809-65ab-af09-b678-dca8c924adc5"
+              >
+                <label for="name" class="label">Broj telefona</label>
+                <input
+                  class="text-field w-input"
+                  maxlength="256"
+                  name="Telefon"
+                  data-name="Name"
+                  placeholder="06xxxxxxxx ili +387xxxxxxxx"
+                  type="tel"
+                  id="Telefon"
+                />
+                <label for="name-2" class="label">Broj fiskalnog racuna</label>
+                <input
+                  class="text-field w-input"
+                  maxlength="256"
+                  name="Racun"
+                  data-name="Name 2"
+                  placeholder=""
+                  type="text"
+                  id="Racun"
+                />
+                <label for="email" class="label">Email</label>
+                <input
+                  class="text-field w-input"
+                  maxlength="256"
+                  name="Email"
+                  data-name="Email"
+                  placeholder=""
+                  type="text"
+                  id="Email"
+                  required=""
+                />
+                <label for="name-3" class="label">Grad</label>
+                <input
+                  class="text-field w-input"
+                  maxlength="256"
+                  name="Grad"
+                  data-name="Name 2"
+                  placeholder=""
+                  type="text"
+                  id="Grad"
+                />
+                <input
+                  type="submit"
+                  data-wait="Please wait..."
+                  class="form-btn submit-btn w-button"
+                  value="Submit"
+                />
+              </form>
+              <div class="success-message w-form-done">
+                <div class="text-block">
+                  Thank you! Your submission has been received!
+                </div>
+              </div>
+              <div class="error-message w-form-fail">
+                <div>Oops! Something went wrong while submitting the form.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <section class="footer">
       <div class="container">
         <div class="w-layout-hflex flex-block-5">
